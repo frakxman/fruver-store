@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+
+import { ProductsService } from '@shared/services/products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,4 +11,17 @@ import { Component } from '@angular/core';
 })
 export class ProductDetailComponent {
 
+  @Input() id?: string;
+  private productService = inject(ProductsService);
+
+  ngOnInit() {
+    if (this.id) {
+      this.productService.getOne(this.id)
+      .subscribe({
+        next: (product) => {
+         console.log(product);         
+        }
+      });
+    }
+  }
 }
