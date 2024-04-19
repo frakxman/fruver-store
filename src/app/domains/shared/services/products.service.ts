@@ -10,18 +10,30 @@ import { Product } from '../models/product.model';
 export class ProductsService {
 
   private http = inject(HttpClient);
+  private url = new URL('http://localhost:3000/products');
 
   constructor() {}
 
   getProducts(category_id?: string) {
-    const url = new URL('http://localhost:3000/products');
     if (category_id){
-      url.searchParams.set('categoryId', category_id);
+     this.url.searchParams.set('categoryId', category_id);
     }
-    return this.http.get<Product[]>(url.toString());
+    return this.http.get<Product[]>(`${this.url}`);
   }
 
   getOne(id: string) {
-    return this.http.get<Product>(`http://localhost:3000/products/${id}`);
+    return this.http.get<Product>(`${this.url}/${id}`);
+  }
+
+  create(product: Product) {
+    return this.http.post<Product>(`${this.url}`, product);
+  }
+
+  update(id: string, changes: Partial<Product>) {
+    return this.http.patch<Product>(`${this.url}/${id}`, changes);
+  }
+
+  remove(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
