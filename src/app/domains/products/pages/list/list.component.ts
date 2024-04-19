@@ -6,10 +6,12 @@ import { ProductComponent } from '@products/components/product/product.component
 import { HeaderComponent } from '@shared/components/header/header.component';
 
 // Modules imports
+import { Category } from '@shared/models/category.model';
 import { Product } from '@shared/models/product.model';
 
 // Services imports
 import { CartService } from '@shared/services/cart.service';
+import { CategoryService } from '@shared/services/category.service';
 import { ProductsService } from '@shared/services/products.service';
 
 @Component({
@@ -22,11 +24,22 @@ import { ProductsService } from '@shared/services/products.service';
 export class ListComponent {
 
   prods = signal<Product[]>([]);
+  categs = signal<Category[]>([]);
   private cartService = inject(CartService);
   private productsService = inject(ProductsService);
+  private categoriesService = inject(CategoryService);
 
   ngOnInit() {
-    this.productsService.getProducts()
+    this.getProducts();
+    this.getCategories();
+  }
+
+  addToCart( product: Product ) {
+    this.cartService.add(product);
+  }
+
+ private getProducts() {
+  this.productsService.getProducts()
     .subscribe({
       next: (products) => {
         this.prods.set(products);
@@ -35,13 +48,17 @@ export class ListComponent {
         console.error(error);
       }
     });
-  }
+ }
 
-  addToCart( product: Product ) {
-    this.cartService.add(product);
-  }
-
-  removeFromCart( product: Product ) {
-    this.cartService.remove(product);
-  }
+ private getCategories() {
+  this.categoriesService.getCategories()
+    .subscribe({
+      next: (categories) => {
+        this.categs.set(categories);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+ }
 }

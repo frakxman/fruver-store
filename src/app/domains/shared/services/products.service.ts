@@ -9,7 +9,7 @@ import { Product } from '../models/product.model';
 })
 export class ProductsService {
 
-  private http = inject(HttpClient)
+  private http = inject(HttpClient);
 
   constructor() {}
 

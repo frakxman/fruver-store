@@ -106,27 +106,27 @@
   "categories": [
     {
       "id": 1,
-      "name": "Category 1",
+      "name": "Fruits",
       "image": "https://picsum.photos/640/640?r=1"
     },
     {
       "id": 2,
-      "name": "Category 2",
+      "name": "Vegetables",
       "image": "https://picsum.photos/640/640?r=2"
     },
     {
       "id": 3,
-      "name": "Category 3",
+      "name": "Grains",
       "image": "https://picsum.photos/640/640?r=3"
     },
     {
       "id": 4,
-      "name": "Category 4",
+      "name": "Grocery",
       "image": "https://picsum.photos/640/640?r=4"
     },
     {
       "id": 5,
-      "name": "Category 5",
+      "name": "Others",
       "image": "https://picsum.photos/640/640?r=5"
     }
   ]
