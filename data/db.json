@@ -1,0 +1,82 @@
+{
+    "products": [
+        {
+          "id": 1,
+          "name": "Pro 1",
+          "price": 100,
+          "images": ["https://picsum.photos/640/640?r=10"],
+          "category": {
+            "id": 1,
+            "name": "Category 1",
+            "image": "https://picsum.photos/640/640?r=1"
+          },
+          "description": "Product description",
+          "quantity": 10
+        },
+        {
+            "id": 2,
+            "name": "Pro 2",
+            "price": 200,
+            "images": ["https://picsum.photos/640/640?r=20"],
+            "category": {
+              "id": 1,
+              "name": "Category 1",
+              "image": "https://picsum.photos/640/640?r=1"
+            },
+            "description": "Product description",
+            "quantity": 10
+        },
+        {
+            "id": 3,
+            "name": "Pro 3",
+            "price": 300,
+            "images": ["https://picsum.photos/640/640?r=30"],
+            "category": {
+              "id": 1,
+              "name": "Category 1",
+              "image": "https://picsum.photos/640/640?r=1"
+            },
+            "description": "Product description",
+            "quantity": 10
+        },
+        {
+            "id": 4,
+            "name": "Pro 4",
+            "price": 400,
+            "images": ["https://picsum.photos/640/640?r=40"],
+            "category": {
+              "id": 1,
+              "name": "Category 1",
+              "image": "https://picsum.photos/640/640?r=1"
+            },
+            "description": "Product description",
+            "quantity": 10
+        },
+        {
+            "id": 5,
+            "name": "Pro 5",
+            "price": 500,
+            "images": ["https://picsum.photos/640/640?r=50"],
+            "category": {
+              "id": 1,
+              "name": "Category 1",
+              "image": "https://picsum.photos/640/640?r=1"
+            },
+            "description": "Product description",
+            "quantity": 10
+        },
+        {
+            "id": 6,
+            "name": "Pro 6",
+            "price": 600,
+            "images": ["https://picsum.photos/640/640?r=60"],
+            "category": {
+              "id": 1,
+              "name": "Category 1",
+              "image": "https://picsum.photos/640/640?r=1"
+            },
+            "description": "Product description",
+            "quantity": 10
+          }        
+    ]
+}
