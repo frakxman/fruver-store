@@ -1,82 +1,133 @@
 {
-    "products": [
-        {
+  "products": [
+      {
+        "id": 1,
+        "name": "Pro 1",
+        "price": 100,
+        "images": [
+          "https://picsum.photos/640/640?r=10",
+          "https://picsum.photos/640/640?r=11",
+          "https://picsum.photos/640/640?r=12"
+        ],
+        "category": {
           "id": 1,
-          "name": "Pro 1",
-          "price": 100,
-          "images": ["https://picsum.photos/640/640?r=10"],
-          "category": {
-            "id": 1,
-            "name": "Category 1",
-            "image": "https://picsum.photos/640/640?r=1"
-          },
-          "description": "Product description",
-          "quantity": 10
+          "name": "Category 1",
+          "image": "https://picsum.photos/640/640?r=1"
         },
-        {
-            "id": 2,
-            "name": "Pro 2",
-            "price": 200,
-            "images": ["https://picsum.photos/640/640?r=20"],
-            "category": {
-              "id": 1,
-              "name": "Category 1",
-              "image": "https://picsum.photos/640/640?r=1"
-            },
-            "description": "Product description",
-            "quantity": 10
+        "description": "Product description",
+        "quantity": 10
+      },
+      {
+        "id": 2,
+        "name": "Pro 2",
+        "price": 200,
+        "images": [
+          "https://picsum.photos/640/640?r=20",
+          "https://picsum.photos/640/640?r=21",
+          "https://picsum.photos/640/640?r=22"
+        ],
+        "category": {
+          "id": 1,
+          "name": "Category 1",
+          "image": "https://picsum.photos/640/640?r=1"
         },
-        {
-            "id": 3,
-            "name": "Pro 3",
-            "price": 300,
-            "images": ["https://picsum.photos/640/640?r=30"],
-            "category": {
-              "id": 1,
-              "name": "Category 1",
-              "image": "https://picsum.photos/640/640?r=1"
-            },
-            "description": "Product description",
-            "quantity": 10
+        "description": "Product description",
+        "quantity": 10
+      },
+      {
+        "id": 3,
+        "name": "Pro 3",
+        "price": 300,
+        "images": [
+          "https://picsum.photos/640/640?r=30",
+          "https://picsum.photos/640/640?r=31",
+          "https://picsum.photos/640/640?r=32"
+        ],
+        "category": {
+          "id": 1,
+          "name": "Category 1",
+          "image": "https://picsum.photos/640/640?r=1"
         },
-        {
-            "id": 4,
-            "name": "Pro 4",
-            "price": 400,
-            "images": ["https://picsum.photos/640/640?r=40"],
-            "category": {
-              "id": 1,
-              "name": "Category 1",
-              "image": "https://picsum.photos/640/640?r=1"
-            },
-            "description": "Product description",
-            "quantity": 10
+        "description": "Product description",
+        "quantity": 10
+      },
+      {
+        "id": 4,
+        "name": "Pro 4",
+        "price": 400,
+        "images": [
+          "https://picsum.photos/640/640?r=40",
+          "https://picsum.photos/640/640?r=41",
+          "https://picsum.photos/640/640?r=42"
+        ],
+        "category": {
+          "id": 2,
+          "name": "Category 2",
+          "image": "https://picsum.photos/640/640?r=1"
         },
-        {
-            "id": 5,
-            "name": "Pro 5",
-            "price": 500,
-            "images": ["https://picsum.photos/640/640?r=50"],
-            "category": {
-              "id": 1,
-              "name": "Category 1",
-              "image": "https://picsum.photos/640/640?r=1"
-            },
-            "description": "Product description",
-            "quantity": 10
+        "description": "Product description",
+        "quantity": 10
+      },
+      {
+        "id": 5,
+        "name": "Pro 5",
+        "price": 500,
+        "images": [
+          "https://picsum.photos/640/640?r=50",
+          "https://picsum.photos/640/640?r=51",
+          "https://picsum.photos/640/640?r=52"
+        ],
+        "category": {
+          "id": 2,
+          "name": "Category 2",
+          "image": "https://picsum.photos/640/640?r=1"
         },
-        {
-            "id": 6,
-            "name": "Pro 6",
-            "price": 600,
-            "images": ["https://picsum.photos/640/640?r=60"],
-            "category": {
-              "id": 1,
-              "name": "Category 1",
-              "image": "https://picsum.photos/640/640?r=1"
-            },
-            "description": "Product description",
-            "quantity": 10
-          }        
-    ]
+        "description": "Product description",
+        "quantity": 10
+      },
+      {
+        "id": 6,
+        "name": "Pro 6",
+        "price": 600,
+        "images": [
+          "https://picsum.photos/640/640?r=60",
+          "https://picsum.photos/640/640?r=61",
+          "https://picsum.photos/640/640?r=62"
+        ],
+        "category": {
+          "id": 3,
+          "name": "Category 3",
+          "image": "https://picsum.photos/640/640?r=1"
+        },
+        "description": "Product description",
+        "quantity": 10
+      }        
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Category 1",
+      "image": "https://picsum.photos/640/640?r=1"
+    },
+    {
+      "id": 2,
+      "name": "Category 2",
+      "image": "https://picsum.photos/640/640?r=2"
+    },
+    {
+      "id": 3,
+      "name": "Category 3",
+      "image": "https://picsum.photos/640/640?r=3"
+    },
+    {
+      "id": 4,
+      "name": "Category 4",
+      "image": "https://picsum.photos/640/640?r=4"
+    },
+    {
+      "id": 5,
+      "name": "Category 5",
+      "image": "https://picsum.photos/640/640?r=5"
+    }
+  ]
 }
