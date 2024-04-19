@@ -13,9 +13,12 @@ export class ProductsService {
 
   constructor() {}
 
-  getProducts() {
-  //   return this.http.get<Product[]>('https://api.escuelajs.co/api/v1/products');
-    return this.http.get<Product[]>('http://localhost:3000/products');
+  getProducts(category_id?: string) {
+    const url = new URL('http://localhost:3000/products');
+    if (category_id){
+      url.searchParams.set('categoryId', category_id);
+    }
+    return this.http.get<Product[]>(url.toString());
   }
 
   getOne(id: string) {

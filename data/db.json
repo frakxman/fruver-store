@@ -11,7 +11,7 @@
         ],
         "category": {
           "id": 1,
-          "name": "Category 1",
+          "name": "Fruits",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
@@ -28,7 +28,7 @@
         ],
         "category": {
           "id": 1,
-          "name": "Category 1",
+          "name": "Fruits",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
@@ -44,8 +44,8 @@
           "https://picsum.photos/640/640?r=32"
         ],
         "category": {
-          "id": 1,
-          "name": "Category 1",
+          "id": 2,
+          "name": "Vegetables",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
@@ -62,7 +62,7 @@
         ],
         "category": {
           "id": 2,
-          "name": "Category 2",
+          "name": "Vegetables",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
@@ -78,8 +78,8 @@
           "https://picsum.photos/640/640?r=52"
         ],
         "category": {
-          "id": 2,
-          "name": "Category 2",
+          "id": 3,
+          "name": "Grains",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
@@ -95,8 +95,8 @@
           "https://picsum.photos/640/640?r=62"
         ],
         "category": {
-          "id": 3,
-          "name": "Category 3",
+          "id": 4,
+          "name": "Grocery",
           "image": "https://picsum.photos/640/640?r=1"
         },
         "description": "Product description",
