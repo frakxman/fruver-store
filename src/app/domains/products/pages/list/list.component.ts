@@ -27,41 +27,81 @@ export class ListComponent {
     const initProducts: Product[] = [
       {
         id: 1,
-        name: 'Gourmet',
-        description: 'Kitchen technician with extense experience and knowledge in Catering, Sommelier, Barista, Bartender, Waiter and Protocol Master',
-        price: 0,
+        name: 'Orange',
+        description: 'Fresh to make juice.',
+        price: 5000,
         image: 'https://picsum.photos/640/640?=' + Math.random(),
-        category: 'Food',
+        category: 'Fruits',
         quantity: 0,
         isAvailable: false
       },
       {
         id: 2,
-        name: 'Full Stack Developer',
-        description: 'Technologist in Systems Analysis and Development with emphasis on Fullstack Development with MEAN, MEVN',
+        name: 'Apple',
+        description: 'Green or red, always crispies.',
         price: 2000,
         image: 'https://picsum.photos/640/640?=' + Math.random(),
-        category: 'Technology',
+        category: 'Fruits',
         quantity: 5,
         isAvailable: true
       },
       {
         id: 3,
-        name: 'Multimedia Producer',
-        description: 'Technologist in Multimedia Production with knowledge in Photography, Video, Radial Guidelines, Graphic Design',
+        name: 'Pineapple',
+        description: 'Flavored sweet tropical.',
         price: 1000,
         image: 'https://picsum.photos/640/640?=' + Math.random(),
-        category: 'Graphic Design',
+        category: 'Fruits',
         quantity: 5,
         isAvailable: true
       },
       {
         id: 4,
-        name: 'Drone Pilot',
-        description: 'Professional Drone Pilot with specialization in Photogrammetry, Crop Fumigation, Photography and Video with about 180 flight hours',
+        name: 'Passion fruit',
+        description: 'The Exotic fruit to passion.',
         price: 1000,
         image: 'https://picsum.photos/640/640?=' + Math.random(),
-        category: 'Technology',
+        category: 'Fruits',
+        quantity: 5,
+        isAvailable: true
+      },
+      {
+        id: 5,
+        name: 'Carrot',
+        description: 'Fresh and organic.',
+        price: 3000,
+        image: 'https://picsum.photos/640/640?=' + Math.random(),
+        category: 'Vegetables',
+        quantity: 0,
+        isAvailable: false
+      },
+      {
+        id: 6,
+        name: 'Onion',
+        description: 'Aromatic and tasty.',
+        price: 2000,
+        image: 'https://picsum.photos/640/640?=' + Math.random(),
+        category: 'Vegetables',
+        quantity: 5,
+        isAvailable: true
+      },
+      {
+        id: 7,
+        name: 'Tomato',
+        description: 'From the garden to your table.',
+        price: 1000,
+        image: 'https://picsum.photos/640/640?=' + Math.random(),
+        category: 'Vegetables',
+        quantity: 5,
+        isAvailable: true
+      },
+      {
+        id: 8,
+        name: 'Potato',
+        description: 'Versatile and delicious.',
+        price: 1000,
+        image: 'https://picsum.photos/640/640?=' + Math.random(),
+        category: 'Vegetables',
         quantity: 5,
         isAvailable: true
       }
