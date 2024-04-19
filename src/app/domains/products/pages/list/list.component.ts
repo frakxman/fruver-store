@@ -26,15 +26,16 @@ export class ListComponent {
   private productsService = inject(ProductsService);
 
   ngOnInit() {
-    this.productsService.getProducts()
-    .subscribe({
-      next: (products) => {
-        this.prods.set(products);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+    // this.productsService.getProducts()
+    // .subscribe({
+    //   next: (products) => {
+    //     this.prods.set(products);
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //   }
+    // });
+    this.prods.set(this.productsService.products());
   }
 
   addToCart( product: Product ) {

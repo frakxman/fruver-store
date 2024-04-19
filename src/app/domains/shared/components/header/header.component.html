@@ -16,7 +16,9 @@
           <li>
             <a
               routerLink="/"
-              class="block underline hover:underline"
+              routerLinkActive="underline"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="block hover:underline"
               aria-current="page"
             >
               Home
@@ -25,6 +27,7 @@
           <li>
             <a
               routerLink="/about"
+              routerLinkActive="underline"
               class="block hover:underline"
             >
               About
@@ -33,6 +36,7 @@
           <li>
             <a 
               routerLink="/services" 
+              routerLinkActive="underline"
               class="block hover:underline"
             >
               Services
@@ -88,6 +92,7 @@
   <div class="pt-4 flex flex-col">
     <div class="flex justify-between items-center space-y-2" *ngFor="let product of cart()">
       <div class="flex space-x-2 items-center">
+        <!-- <img [src]="product.images[0]" [alt]="product.name" class="w-6 h6"> -->
         <img [src]="product.images[0]" [alt]="product.name" class="w-6 h6">
         <h3>{{ product.name }}</h3>
       </div>
