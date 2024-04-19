@@ -22,7 +22,7 @@ import { ProductsService } from '@shared/services/products.service';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent {
+export default class ListComponent {
 
   prods = signal<Product[]>([]);
   categs = signal<Category[]>([]);
