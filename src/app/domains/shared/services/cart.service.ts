@@ -10,12 +10,22 @@ export class CartService {
   cart = signal<Product[]>([]);
   total = computed(() => {
     const cart = this.cart();
-    return cart.reduce( (total, product) => total + product.price, 0 );
+    return cart.reduce( (total, product) => total + (product.price * product.quantity), 0 );
   });
 
+
   add(product: Product) {
-    this.cart.update(state => [...state, product] );
-  }  
+    this.cart.update(state => {
+      const existingProductIndex = state.findIndex(item => item.id === product.id)
+      if (existingProductIndex !== -1) {
+          const updatedCart = [...state];
+          updatedCart[existingProductIndex].quantity += 1;
+          return updatedCart;
+      } else {
+          return [...state, product];
+      }
+    });
+  }
 
   remove(product: Product) {
     this.cart.update(state => state.filter( p => p.id !== product.id ));

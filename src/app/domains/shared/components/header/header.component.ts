@@ -22,4 +22,8 @@ export class HeaderComponent {
     this.hideSideMenu.update(prevState => !prevState);
   }
 
+  checkout() {
+    console.log('checkout');
+  }
+
 }
