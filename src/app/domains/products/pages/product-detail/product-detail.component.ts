@@ -29,9 +29,7 @@ export default class ProductDetailComponent {
       .subscribe({
         next: (product) => {
           this.product.set(product);
-          if (product.images.length > 0) {
-            this.cover.set(product.images[0]);
-          }
+          this.cover.set(product.images?.[0] ?? '@assets/images/no-image.png');
         },
         error: (error) => {
           console.error('Error:', error);
