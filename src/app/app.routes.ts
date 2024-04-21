@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 
 // Components
+import { AdminLayoutComponent } from './domains/admin/component/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './domains/auth/components/auth-layout/auth-layout.component';
 import { NotFoundComponent } from './domains/info/pages/not-found/not-found.component';
 import { LayoutComponent } from '@shared/components/layout/layout.component';
-import { AuthLayoutComponent } from './domains/auth/components/auth-layout/auth-layout.component';
 
 export const routes: Routes = [
   {
@@ -35,11 +36,25 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./domains/auth/pages/login/login.component')
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'products',
+        loadComponent: () => import('./domains/admin/pages/products/products.component')
       },
       {
         path: 'create',
         loadComponent: () => import('./domains/products/pages/form/form.component')
-      }
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () => import('./domains/products/pages/form/form.component')
+      },
     ]
   },
   {

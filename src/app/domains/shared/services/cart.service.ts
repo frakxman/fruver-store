@@ -35,23 +35,54 @@ export class CartService {
     });
   }
 
-  remove(product: Product) {
-    this.cart.update(state => {
-      const existingProductIndex = state.findIndex(item => item.id === product.id)
-      if (existingProductIndex !== -1) {
-        const updatedCart = [...state];
-        updatedCart[existingProductIndex].quantity -= 1;
+  // remove(product: Product) {
+  //   this.cart.update(state => {
+  //     const existingProductIndex = state.findIndex(item => item.id === product.id)
+  //     if (existingProductIndex !== -1) {
+  //       const updatedCart = [...state];
+  //       updatedCart[existingProductIndex].quantity -= 1;
 
-        if (updatedCart[existingProductIndex].quantity === 0) {
-          updatedCart.splice(existingProductIndex, 1);
-        }
+  //       if (updatedCart[existingProductIndex].quantity === 0) {
+  //         updatedCart.splice(existingProductIndex, 1);
+  //       }
 
-        return updatedCart;
-      } else {
-        return [...state, product];
+  //       return updatedCart;
+  //     } else {
+  //       return [...state, product];
+  //     }
+  //   });
+  // }
+
+  decreaseQuantity(product: Product) {
+  this.cart.update(state => {
+    const existingProductIndex = state.findIndex(item => item.id === product.id);
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...state];
+      updatedCart[existingProductIndex].quantity -= 1;
+
+      if (updatedCart[existingProductIndex].quantity === 0) {
+        updatedCart.splice(existingProductIndex, 1);
       }
-    });
-  }
+
+      return updatedCart;
+    } else {
+      return state;
+    }
+  });
+}
+
+removeProduct(product: Product) {
+  this.cart.update(state => {
+    const existingProductIndex = state.findIndex(item => item.id === product.id);
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...state];
+      updatedCart.splice(existingProductIndex, 1);
+      return updatedCart;
+    } else {
+      return state;
+    }
+  });
+}
 
   updateQuantity(product: Product, quantity: number) {
     this.cart.update(state => state.map( p => p.id === product.id ? { ...p, quantity } : p ));

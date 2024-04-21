@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export default class LoginComponent {
 
   private fb = inject( FormBuilder );
   private authService = inject(AuthService);
+  private router = inject(Router)
 
   public loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -22,19 +24,16 @@ export default class LoginComponent {
   });
 
   onLogin() {
-    if (this.loginForm.invalid) {
-      return;
-    }
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
 
-    const user = this.loginForm.value;
-    console.log('User logged in', user);
-    // TODO: Show loading spinner while waiting for response?
-    // this.authService.login(this.loginForm.value)
-    //   .subscribe({
-    //     next: (user) => {
-    //     },
-    //     error: () => {
-    //     }
-    //   });
+    if (email && password) {
+      this.authService.login(email, password)
+        .subscribe( user => {
+          console.log('User logged in', user);
+          this.router.navigate(['/cart']);
+        });
+    }
   }
+
 }

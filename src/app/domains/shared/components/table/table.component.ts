@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLinkWithHref,  } from '@angular/router';
 
 import { CartService } from '../../services/cart.service';
 import { Product } from '@shared/models/product.model';
@@ -8,7 +8,7 @@ import { Product } from '@shared/models/product.model';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLinkWithHref],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -20,17 +20,20 @@ export class TableComponent {
   cart = this.cartService.cart;
   total = this.cartService.total;
 
+  ngOnInit() {
+
+  }
+
   add(product: Product) {
-    console.log('add');
     this.cartService.add( product );
   }
 
   minus(product: Product) {
-    console.log('minus');
-    this.cartService.remove(product);
+    this.cartService.decreaseQuantity(product);
   }
 
-  userConfirm() {
-    this.router.navigate(['/auth/login']);
+  remove(product: Product) {
+    this.cartService.removeProduct(product);
   }
+
 }

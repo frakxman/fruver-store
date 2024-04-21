@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Category } from '@shared/models/category.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 
+import { Category } from '@shared/models/category.model';
 import { Product } from '@shared/models/product.model';
 
 import { CategoryService } from '@shared/services/category.service';
@@ -21,6 +22,8 @@ export default class FormComponent {
   private fb = inject( FormBuilder );
   private categoriesService = inject(CategoryService);
   private productService = inject(ProductsService);
+  private activatedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
 
   product: Product = {
     id: 0,
@@ -36,12 +39,6 @@ export default class FormComponent {
   categs = signal<Category[]>([]);
   prods = signal<Product[]>([]);
 
-
-  ngOnInit() {
-    this.getCategories();
-    this.getProducts();
-  }
-
   public productForm: FormGroup = this.fb.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -53,6 +50,23 @@ export default class FormComponent {
     images: this.fb.array(['']),
   });
 
+  ngOnInit() {
+    this.getCategories();
+    this.getProducts();
+    if ( !this.router.url.includes('edit') ) return;
+    this.activatedRoute.params
+    .pipe(
+      switchMap(({ id }) => this.productService.getOne(id)),
+    ).subscribe({
+      next: prod => this.productForm.reset(prod),
+      error: () => this.router.navigate(['/products'])
+    });
+  }
+
+  get currentProduct() {
+    const product = this.productForm.value as Product;
+    return product;
+  }
 
   private getCategories() {
     this.categoriesService.getCategories()
@@ -78,24 +92,42 @@ export default class FormComponent {
       });
   }
 
-  addProduct() {
-  const newId = this.prods().length + 1;
+  onSubmit() {
+    if (this.productForm.invalid) return;
 
-  const defaultImage = 'https://picsum.photos/640/640?r=' + Math.random();
+    if (this.product.id) {
+      this.productService.update(this.product.id.toString(), this.productForm.value)
+        .subscribe({
+          next: (product) => {
+            const index = this.prods().findIndex(p => p.id === product.id);
+            this.prods.update(state => {
+              state[index] = product;
+              return state;
+            });
+            console.log('Product updated', product);
+          },
+          error: (e) => alert('Error updating product')
+        });
+      return;
+    }
 
-  this.productForm.patchValue({
-    id: newId.toString(),
-    images: [defaultImage]
-  });
+    const newId = this.prods().length + 1;
+    const defaultImage = 'https://picsum.photos/640/640?r=' + Math.random();
 
-  this.productService.create(this.productForm.value)
-    .subscribe({
-      next: (product) => {
-        this.prods.update(state => [...state, product]);
-        console.log('Product created', product);
-        // this.productForm.reset();
-      },
-      error: (e) => alert('Error creating product')
+    this.productForm.patchValue({
+      id: newId.toString(),
+      images: [defaultImage]
     });
-}
+
+    this.productService.create(this.productForm.value)
+      .subscribe({
+        next: (product) => {
+          this.prods.update(state => [...state, product]);
+          console.log('Product created', product);
+          this.router.navigate(['/admin/products']);
+          this.productForm.reset();
+        },
+        error: (e) => alert('Error creating product')
+      });
+  }
 }
