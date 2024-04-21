@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category } from '@shared/models/category.model';
 
 import { Product } from '@shared/models/product.model';
 
 import { CategoryService } from '@shared/services/category.service';
 import { ProductsService } from '@shared/services/products.service';
-
-// import { ProductImagePipe } from "@shared/pipes/prod-img.pipe";
 
 @Component({
   selector: 'app-form',
