@@ -26,6 +26,7 @@ export default class ListComponent {
 
   prods = signal<Product[]>([]);
   categs = signal<Category[]>([]);
+
   private cartService = inject(CartService);
   private productsService = inject(ProductsService);
   private categoriesService = inject(CategoryService);
@@ -44,27 +45,27 @@ export default class ListComponent {
     this.cartService.add(product);
   }
 
- private getProducts() {
-  this.productsService.getProducts(this.category_id)
-    .subscribe({
-      next: (products) => {
-        this.prods.set(products);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
- }
+  private getProducts() {
+    this.productsService.getProducts()
+      .subscribe({
+        next: (products) => {
+          this.prods.set(products);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
 
- private getCategories() {
-  this.categoriesService.getCategories()
-    .subscribe({
-      next: (categories) => {
-        this.categs.set(categories);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
- }
+  private getCategories() {
+    this.categoriesService.getCategories()
+      .subscribe({
+        next: (categories) => {
+          this.categs.set(categories);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
 }

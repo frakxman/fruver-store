@@ -18,11 +18,11 @@ export class CartService {
     this.cart.update(state => {
       const existingProductIndex = state.findIndex(item => item.id === product.id)
       if (existingProductIndex !== -1) {
-          const updatedCart = [...state];
-          updatedCart[existingProductIndex].quantity += 1;
-          return updatedCart;
+        const updatedCart = [...state];
+        updatedCart[existingProductIndex].quantity += 1;
+        return updatedCart;
       } else {
-          return [...state, product];
+        return [...state, product];
       }
     });
   }

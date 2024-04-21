@@ -14,10 +14,7 @@ export class ProductsService {
 
   constructor() {}
 
-  getProducts(category_id?: string) {
-    if (category_id){
-     this.url.searchParams.set('categoryId', category_id);
-    }
+  getProducts() {
     return this.http.get<Product[]>(`${this.url}`);
   }
 

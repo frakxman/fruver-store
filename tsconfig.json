@@ -29,6 +29,7 @@
       // "@core/*": ["src/app/core/*"],
       "@products/*": ["./src/app/domains/products/*"],
       "@shared/*": ["./src/app/domains/shared/*"],
+      "@assets/*": ["./src/assets/*"],
       // "@modules/*": ["src/app/modules/*"],
       // "@services/*": ["src/app/services/*"],
       // "@models/*": ["src/app/models/*"],
