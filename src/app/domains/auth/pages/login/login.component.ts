@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -17,11 +17,11 @@ export default class LoginComponent {
   private authService = inject(AuthService);
 
   public loginForm = this.fb.group({
-    email: [''],
-    password: [''],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  login() {
+  onLogin() {
     if (this.loginForm.invalid) {
       return;
     }
