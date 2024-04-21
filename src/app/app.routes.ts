@@ -19,8 +19,8 @@ export const routes: Routes = [
         loadComponent: () => import('./domains/products/pages/product-detail/product-detail.component')
       },
       {
-        path: 'create',
-        loadComponent: () => import('./domains/products/pages/form/form.component')
+        path: 'cart',
+        loadComponent: () => import('./domains/products/pages/cart/cart.component')
       }
     ]
   },
@@ -35,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./domains/auth/pages/login/login.component')
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./domains/products/pages/form/form.component')
       }
     ]
   },

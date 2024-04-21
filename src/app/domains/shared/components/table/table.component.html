@@ -1,0 +1,35 @@
+<div class="overflow-auto">
+  <table class="table-auto w-full">
+    <thead>
+      <tr>
+        <th class="px-4 py-2"></th>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Quantity</th>
+        <th class="px-4 py-2">Price</th>
+        <th class="px-4 py-2">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of cart()" class="border-t">
+        <td class="px-4 py-2">
+          <img
+            [src]="product.images[0] ? product.images[0] : 'assets/logo/noImage.jpg'"
+            [alt]="product.name"
+            class="w-6 h-6"
+          >
+        </td>
+        <td class="px-4 py-2">{{ product.name }}</td>
+        <td class="px-4 py-2 text-center">
+          {{ product.quantity }}
+        </td>
+        <td class="px-4 py-2">{{ product.price | currency:'$':'symbol':'1.0' }}</td>
+        <td class="px-4 py-2 text-right">{{ (product.price * product.quantity ) | currency:'$':'symbol':'1.0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex justify-between mt-2 bg-red-700 text-white p-2 rounded">
+    <p class="font-medium text-left">TOTAL </p>
+    <span class="font-bold text-right">{{ total() | currency:'$':'symbol':'1.0' }}</span>
+  </div>
+
+</div>

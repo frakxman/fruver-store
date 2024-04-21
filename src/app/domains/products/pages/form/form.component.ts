@@ -81,16 +81,12 @@ export default class FormComponent {
   addProduct() {
   const newId = this.prods().length + 1;
 
-  const defaultImages = Array.from({ length: 3 }, () => `https://picsum.photos/640/640?r=${Math.random()}`);
-
-  const imagesValue = this.productForm.get('images')?.value;
+  const defaultImage = 'https://picsum.photos/640/640?r=' + Math.random();
 
   this.productForm.patchValue({
     id: newId.toString(),
-    images: imagesValue && imagesValue.length ? imagesValue : defaultImages
+    images: [defaultImage]
   });
-
-  console.log('Form value', this.productForm.value)
 
   this.productService.create(this.productForm.value)
     .subscribe({
@@ -101,5 +97,5 @@ export default class FormComponent {
       },
       error: (e) => alert('Error creating product')
     });
-  }
+}
 }

@@ -8,6 +8,10 @@ import { Product } from '../models/product.model';
 export class CartService {
 
   cart = signal<Product[]>([]);
+  prodsQuantity = computed(() => {
+  const cart = this.cart();
+  return cart.reduce((total, product) => total + product.quantity, 0);
+});
   total = computed(() => {
     const cart = this.cart();
     return cart.reduce( (total, product) => total + (product.price * product.quantity), 0 );
