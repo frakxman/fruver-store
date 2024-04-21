@@ -27,7 +27,7 @@ export class HeaderComponent {
     this.hideSideMenu.update(prevState => !prevState);
   }
 
-  checkout() {
+  goToCart() {
     this.router.navigate(['/cart']);
     this.hideSideMenu.update(() => true);
   }

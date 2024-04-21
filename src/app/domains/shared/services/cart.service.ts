@@ -9,13 +9,17 @@ export class CartService {
 
   cart = signal<Product[]>([]);
   prodsQuantity = computed(() => {
-  const cart = this.cart();
-  return cart.reduce((total, product) => total + product.quantity, 0);
-});
+    const cart = this.cart();
+    return cart.reduce((total, product) => total + product.quantity, 0);
+  });
   total = computed(() => {
     const cart = this.cart();
     return cart.reduce( (total, product) => total + (product.price * product.quantity), 0 );
   });
+
+  find(id: number) {
+    return this.cart().find(product => product.id === id);
+  }
 
 
   add(product: Product) {
@@ -32,7 +36,21 @@ export class CartService {
   }
 
   remove(product: Product) {
-    this.cart.update(state => state.filter( p => p.id !== product.id ));
+    this.cart.update(state => {
+      const existingProductIndex = state.findIndex(item => item.id === product.id)
+      if (existingProductIndex !== -1) {
+        const updatedCart = [...state];
+        updatedCart[existingProductIndex].quantity -= 1;
+
+        if (updatedCart[existingProductIndex].quantity === 0) {
+          updatedCart.splice(existingProductIndex, 1);
+        }
+
+        return updatedCart;
+      } else {
+        return [...state, product];
+      }
+    });
   }
 
   updateQuantity(product: Product, quantity: number) {

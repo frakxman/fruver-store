@@ -8,9 +8,6 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
-  uploadImage(file: File) {
-    throw new Error('Method not implemented.');
-  }
 
   private http = inject(HttpClient);
   private url = new URL('http://localhost:3000/products');
