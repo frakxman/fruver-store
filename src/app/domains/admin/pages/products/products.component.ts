@@ -1,33 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-
-import { TableComponent } from "@shared/components/table/table.component";
+import { Router } from '@angular/router';
 
 import { Product } from '@shared/models/product.model';
-import { Category } from '@shared/models/category.model';
 
 import { ProductsService } from '@shared/services/products.service';
-import { CategoryService } from '@shared/services/category.service';
 
 @Component({
     selector: 'app-products',
     standalone: true,
     templateUrl: './products.component.html',
     styleUrl: './products.component.css',
-    imports: [TableComponent]
+    imports: [CommonModule]
 })
 export default class ProductsComponent {
 
-  products: Product[] = [];
   prods = signal<Product[]>([]);
-  categs = signal<Category[]>([]);
+  showModal: boolean = false;
+  productToRemove!: Product;
 
   private productsService = inject(ProductsService);
-  private categoriesService = inject(CategoryService);
+  private router = inject(Router);
 
   ngOnInit() {
     this.getProducts();
-    this.getCategories();
-    console.log('Products:', this.products);
   }
 
   private getProducts() {
@@ -35,7 +31,6 @@ export default class ProductsComponent {
       .subscribe({
         next: (products) => {
           this.prods.set(products);
-          this.products =  products;
         },
         error: (error) => {
           console.error(error);
@@ -43,16 +38,21 @@ export default class ProductsComponent {
       });
   }
 
-  private getCategories() {
-    this.categoriesService.getCategories()
+  edit(product: Product) {
+    console.log('Edit product', typeof product.id, product.id);
+    const id = product.id;
+    this.router.navigate([`/admin/edit/${id!}`]);
+  }
+
+  remove(product: Product) {
+    this.productsService.remove(product.id!.toString())
       .subscribe({
-        next: (categories) => {
-          this.categs.set(categories);
+        next: () => {
+          this.getProducts();
         },
         error: (error) => {
           console.error(error);
         }
       });
   }
-
 }

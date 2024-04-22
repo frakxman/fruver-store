@@ -21,7 +21,6 @@ export class CartService {
     return this.cart().find(product => product.id === id);
   }
 
-
   add(product: Product) {
     this.cart.update(state => {
       const existingProductIndex = state.findIndex(item => item.id === product.id)
@@ -34,24 +33,6 @@ export class CartService {
       }
     });
   }
-
-  // remove(product: Product) {
-  //   this.cart.update(state => {
-  //     const existingProductIndex = state.findIndex(item => item.id === product.id)
-  //     if (existingProductIndex !== -1) {
-  //       const updatedCart = [...state];
-  //       updatedCart[existingProductIndex].quantity -= 1;
-
-  //       if (updatedCart[existingProductIndex].quantity === 0) {
-  //         updatedCart.splice(existingProductIndex, 1);
-  //       }
-
-  //       return updatedCart;
-  //     } else {
-  //       return [...state, product];
-  //     }
-  //   });
-  // }
 
   decreaseQuantity(product: Product) {
   this.cart.update(state => {

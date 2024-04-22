@@ -95,13 +95,14 @@ export default class FormComponent {
   onSubmit() {
     if (this.productForm.invalid) return;
 
-    if (this.product.id) {
-      this.productService.update(this.product.id.toString(), this.productForm.value)
+    if (this.currentProduct.id) {
+      this.productService.update(this.currentProduct.id.toString(), this.productForm.value)
         .subscribe({
           next: (product) => {
             const index = this.prods().findIndex(p => p.id === product.id);
             this.prods.update(state => {
               state[index] = product;
+              this.router.navigate(['/admin/products']);
               return state;
             });
             console.log('Product updated', product);
