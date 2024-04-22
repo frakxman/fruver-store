@@ -14,6 +14,9 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminLayoutComponent {
 
+  /**
+   * Represents an array of links for the admin layout component.
+   */
   links: any[] = [
       { path: '/admin', label: 'Dashboard' },
       { path: '/admin/products', label: 'Products' },
