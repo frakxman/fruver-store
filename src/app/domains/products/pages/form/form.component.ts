@@ -23,7 +23,7 @@ export default class FormComponent {
   private categoriesService = inject(CategoryService);
   private productService = inject(ProductsService);
   private activatedRoute = inject(ActivatedRoute);
-  private router = inject(Router);
+  router = inject(Router);
 
   product: Product = {
     id: 0,

@@ -20,10 +20,6 @@ export class TableComponent {
   cart = this.cartService.cart;
   total = this.cartService.total;
 
-  ngOnInit() {
-
-  }
-
   add(product: Product) {
     this.cartService.add( product );
   }
