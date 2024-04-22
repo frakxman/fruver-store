@@ -2,12 +2,10 @@
   "products": [
     {
       "id": "1",
-      "name": "Orange",
+      "name": "Orangiata",
       "price": 100,
       "images": [
-        "https://picsum.photos/640/640?r=10",
-        "https://picsum.photos/640/640?r=11",
-        "https://picsum.photos/640/640?r=12"
+        "https://picsum.photos/640/640?r=10"
       ],
       "categoryId": 1,
       "description": "La jugosa y refrescante naranja es un fruto emblemático de la categoría de frutas. Con su brillante color y sabor dulce y cítrico, es una fuente de vitamina C y antioxidantes. Perfecta para jugos, ensaladas o simplemente como un snack saludable. Disfruta de su frescura y beneficios para la salud en cada bocado.",
@@ -204,6 +202,18 @@
       "name": "User 1",
       "email": "user1@example.com",
       "password": "123456"
+    },
+    {
+      "id": "2",
+      "name": "User 2",
+      "email": "user2@example.com",
+      "password": "abcdefg"
+    },
+    {
+      "id": "3",
+      "name": "User 3",
+      "email": "user3@example.com",
+      "password": "hijklmn"
     }
   ],
   "admin": [
