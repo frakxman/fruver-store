@@ -23,9 +23,10 @@ export default class CartComponent implements OnInit  {
   cart = this.cartService.cart;
   total = this.cartService.total;
   logged = false;
-  userInfo = {};
-  payMethod = false;
-  paymentInfo = {};
+  step = 0;
+  locationData: any = {};
+  payMethodData: any = {};
+  
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
@@ -36,26 +37,25 @@ export default class CartComponent implements OnInit  {
     this.router.navigate(['/auth/login']);
   }
 
-  handleCustomerData(locationData: any) {
-    this.userInfo = locationData;
-    this.payMethod = true;
-    console.log(this.userInfo);
+  onSubmitLocation(data: any) {
+    this.locationData = data;
+    this.step++;
   }
 
-  handlePayMethod(payInfo: any) {
-    this.paymentInfo  = payInfo;
-    console.log(this.paymentInfo);
+  onSubmitPayMethod(data: any) {
+    this.payMethodData = data;
+    this.step++;
   }
 
   generateOrder() {
-    if (!this.logged || !this.payMethod) return;
+    // if (!this.logged || !this.payMethod) return;
 
     const userId = localStorage.getItem('user');
 
     const orderData = {
       userId: userId,
-      userInfo: this.userInfo,
-      paymentInfo: this.paymentInfo
+      locationData: this.locationData,
+      payMethodData: this.payMethodData
     };
 
     console.log(orderData);
