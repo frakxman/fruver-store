@@ -27,6 +27,7 @@
       // "@app/*": ["src/app/*"],
       "@env/*": ["./src/environments/*"],
       // "@core/*": ["src/app/core/*"],
+      "@auth/*": ["./src/app/domains/auth/*"],
       "@products/*": ["./src/app/domains/products/*"],
       "@shared/*": ["./src/app/domains/shared/*"],
       "@assets/*": ["./src/assets/*"],

@@ -37,17 +37,12 @@ export class AuthService {
             }
           }
         })
-      );
+    )
   }
   
   logout() {
     this.user = undefined;
     localStorage.removeItem('user');
   }
-
-  isAuthenticated(): boolean {
-    return false;
-  }
-
 
 }

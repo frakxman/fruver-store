@@ -1,4 +1,7 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; 
+
+import { environment } from '@env/environments';
 
 import { Product } from '../models/product.model';
 
@@ -6,6 +9,10 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class CartService {
+
+  private readonly baseUrl: string = environment.baseUrl;
+  
+  private http = inject(HttpClient);
 
   cart = signal<Product[]>([]);
   prodsQuantity = computed(() => {
@@ -67,5 +74,9 @@ removeProduct(product: Product) {
 
   updateQuantity(product: Product, quantity: number) {
     this.cart.update(state => state.map( p => p.id === product.id ? { ...p, quantity } : p ));
+  }
+
+  generateOrder(orderData: any) {
+    return this.http.post(`${this.baseUrl}/orders`, orderData)
   }
 }
