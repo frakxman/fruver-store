@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable, map } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -19,12 +20,18 @@ export default class RegisterComponent {
   private fb = inject( FormBuilder );
   private authService = inject(AuthService);
 
-  user: User = {
+  user: User = { 
     id: 0,
-    name: '',
+    name: '', 
     email: '',
-    password: '',
+    password: '' 
   };
+
+  currentUser?: User;
+
+  ngOnInit() {
+    this.setUserId();
+  }
 
   public userForm: FormGroup = this.fb.group({
     id: [''],
@@ -33,22 +40,42 @@ export default class RegisterComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
+ setUserId(): Observable<number> {
+  return this.authService.getAllUsers()
+    .pipe(
+      map(users => users.length + 1)
+    );
+  }
+
   register() {
-    if (this.userForm.invalid) {
-      return;
-    }
+    if (this.userForm.invalid) return;
 
-    const user: User = this.userForm.value;
-    console.log('User created', user);
+    this.setUserId().subscribe(id => {
+    this.user = { ...this.userForm.value, id };
+    console.log('Registering user', this.user);
+    this.authService.register(this.user)
+      .subscribe({
+        next: (user) => {
+          console.log('User created', user);
+        },
+        error: (err) => {
+          console.error('Error creating user', err);
+        }
+      });
+    });
+  }
 
-    // this.authService.register(this.userForm.value)
-    //   .subscribe({
-    //     next: (user) => {
-    //     },
-    //     error: (err) => {
-    //       console.error('Error creating user', err);
-    //     }
-    //   });
+  loging() {
+    this.authService.login(this.user.email, this.user.password)
+      .subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          console.log('User logged in', user);
+        },
+        error: (err) => {
+          console.error('Error logging in', err);
+        }
+      });
   }
 
 }
