@@ -8,6 +8,8 @@ import { CustomerDataComponent } from "../../components/customer-data/customer-d
 import { CartService } from '@shared/services/cart.service';
 import { PayMethodsComponent } from "../../components/pay-methods/pay-methods.component";
 
+import { Customer, Order, Payment } from '@shared/models/order.model';
+
 @Component({
     selector: 'app-cart',
     standalone: true,
@@ -23,10 +25,12 @@ export default class CartComponent implements OnInit  {
   cart = this.cartService.cart;
   total = this.cartService.total;
   logged = false;
+  showModal = false;
   step = 0;
-  locationData: any = {};
-  payMethodData: any = {};
-  
+  locationData!: Customer;
+  payMethodData!: Payment;
+  orderData!: Order;
+
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
@@ -37,30 +41,34 @@ export default class CartComponent implements OnInit  {
     this.router.navigate(['/auth/login']);
   }
 
-  onSubmitLocation(data: any) {
+  onLocation(data: any) {
+    console.log(data)
     this.locationData = data;
     this.step++;
   }
 
-  onSubmitPayMethod(data: any) {
-    this.payMethodData = data;
-    this.step++;
-  }
+  onPayMethod(data: any) {
+    console.log(data)
+    this.showModal = true;
+    const userId = localStorage.getItem('user') ?? '';
 
-  generateOrder() {
-    // if (!this.logged || !this.payMethod) return;
-
-    const userId = localStorage.getItem('user');
-
-    const orderData = {
+    this.orderData = {
       userId: userId,
       locationData: this.locationData,
-      payMethodData: this.payMethodData
+      payMethodData: data,
+      products: this.cart(),
+      total: this.total()
     };
+  }
 
-    console.log(orderData);
+  closeModal() {
+    this.showModal = false;
+  }
 
-    this.cartService.generateOrder(orderData)
+  confirmOrder() {
+    console.log('Order generated', this.orderData);
+
+    this.cartService.generateOrder(this.orderData)
       .subscribe({
         next: () => {
           this.cartService.cart.set([]);

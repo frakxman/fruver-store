@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { Customer } from '@shared/models/order.model';
 
 @Component({
   selector: 'app-customer-data',
@@ -10,12 +12,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class CustomerDataComponent {
 
-  @Output() customerData = new EventEmitter<any>();
+  @Output() customerData = new EventEmitter<Customer>();
 
   private fb = inject( FormBuilder );
-  
 
-  public checkoutForm = this.fb.group({
+  public checkoutForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     address: ['', Validators.required],
@@ -25,6 +26,6 @@ export class CustomerDataComponent {
   onSubmit() {
     if (!this.checkoutForm.valid) return;
       this.customerData.emit(this.checkoutForm.value);
-  }
+    }
 
 }

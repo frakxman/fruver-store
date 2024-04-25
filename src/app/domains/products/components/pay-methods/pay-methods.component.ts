@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { Payment } from '@shared/models/order.model';
+
 @Component({
   selector: 'app-pay-methods',
   standalone: true,
@@ -9,7 +11,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './pay-methods.component.css'
 })
 export class PayMethodsComponent {
-  @Output() paymentData = new EventEmitter<any>();
+  @Output() paymentData = new EventEmitter<Payment>();
 
   private fb =  inject(FormBuilder);
 
@@ -19,8 +21,8 @@ export class PayMethodsComponent {
     cvv: ['', Validators.required]
   });
 
-  onSubmit(): void {
-    if (this.paymentForm.valid) return;
+  onSubmit() {
+    if (!this.paymentForm.valid) return;
     this.paymentData.emit(this.paymentForm.value);
   }
 

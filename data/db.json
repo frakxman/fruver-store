@@ -216,13 +216,13 @@
       "password": "hijklmn"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "miryam",
       "email": "myr@iam.com",
       "password": "123456"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "ernesto",
       "email": "ern@esto.com",
       "password": "159753"
@@ -238,5 +238,35 @@
     }
   ],
   "orders": [
+    {
+      "id": "cef5",
+      "userId": "4",
+      "locationData": {
+        "name": "Myriam Restrepo",
+        "email": "myr@iam.com",
+        "address": "Mz 21 casa 20 Barrio La Adiela",
+        "phone": "4128323"
+      },
+      "payMethodData": {
+        "cardNumber": "54385327997",
+        "expiryDate": "02/28",
+        "cvv": "687"
+      },
+      "products": [
+        {
+          "id": "1",
+          "name": "Orangiata",
+          "price": 100,
+          "images": [
+            "https://picsum.photos/640/640?r=10"
+          ],
+          "categoryId": 1,
+          "description": "La jugosa y refrescante naranja es un fruto emblemático de la categoría de frutas. Con su brillante color y sabor dulce y cítrico, es una fuente de vitamina C y antioxidantes. Perfecta para jugos, ensaladas o simplemente como un snack saludable. Disfruta de su frescura y beneficios para la salud en cada bocado.",
+          "quantity": 1,
+          "stock": 10
+        }
+      ],
+      "total": 100
+    }
   ]
 }
