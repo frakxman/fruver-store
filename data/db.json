@@ -133,18 +133,6 @@
       ]
     },
     {
-      "id": "11",
-      "name": "Orangiatina",
-      "description": "La jugosa y refrescante naranja es un fruto emblemático de la categoría de frutas. Con su brillante color y sabor dulce y cítrico, es una fuente de vitamina C y antioxidantes. Perfecta para jugos, ensaladas o simplemente como un snack saludable. Disfruta de su frescura y beneficios para la salud en cada bocado.",
-      "price": 100,
-      "categoryId": 1,
-      "quantity": 1,
-      "stock": 10,
-      "images": [
-        "https://picsum.photos/640/640?r=0.6888573029224487"
-      ]
-    },
-    {
       "id": "12",
       "name": "Lemo",
       "description": "El jugoso y refrescante limón es un fruto emblemático de la categoría de frutas. Con su brillante color y sabor dulce y cítrico, es una fuente de vitamina C y antioxidantes. Perfecta para jugos, ensaladas o simplemente como un snack saludable. Disfruta de su frescura y beneficios para la salud en cada bocado.",
@@ -154,18 +142,6 @@
       "stock": 10,
       "images": [
         "https://picsum.photos/640/640?r=0.35165764903074304"
-      ]
-    },
-    {
-      "id": "13",
-      "name": "Mango",
-      "description": "El jugoso y refrescante limón es un fruto emblemático de la categoría de frutas. Con su brillante color y sabor dulce y cítrico, es una fuente de vitamina C y antioxidantes. Perfecta para jugos, ensaladas o simplemente como un snack saludable. Disfruta de su frescura y beneficios para la salud en cada bocado.",
-      "price": 1000,
-      "categoryId": 1,
-      "quantity": 1,
-      "stock": 10,
-      "images": [
-        "https://picsum.photos/640/640?r=0.65365181167398"
       ]
     }
   ],

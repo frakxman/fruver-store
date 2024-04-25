@@ -44,10 +44,20 @@ export default class ProductsComponent {
     this.router.navigate([`/admin/edit/${id!}`]);
   }
 
+  showConfirmationModal(product: any) {
+    this.productToRemove = product;
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
   remove(product: Product) {
     this.productsService.remove(product.id!.toString())
       .subscribe({
         next: () => {
+          this.showModal = false;
           this.getProducts();
         },
         error: (error) => {
