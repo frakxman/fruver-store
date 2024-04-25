@@ -24,21 +24,21 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/users`, user);
   }
 
-  // With Get to internal api
   login(email: string, password: string): Observable<User> {
-    return this.getAllUsers()
-      .pipe(
-        map(users => users.filter(user => user.email === email && user.password === password)[0]),
-        tap(user => {
-          if (user) {
-            this.user = user;
-            if (this.user.id) {
-              localStorage.setItem('user', this.user.id.toString());
-            }
+  return this.getAllUsers()
+    .pipe(
+      map(users => users.filter(user => user.email === email && user.password === password)[0]),
+      tap(user => {
+        if (user) {
+          this.user = user;
+          if (this.user.name && this.user.role) {
+            localStorage.setItem('user', this.user.name);
+            localStorage.setItem('role', this.user.role); 
           }
-        })
-    )
-  }
+        }
+      })
+  )
+}
 
   logout() {
     this.user = undefined;

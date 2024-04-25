@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 
 import { Router, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
@@ -15,13 +15,19 @@ import { TableComponent } from "../table/table.component";
     styleUrl: './header.component.css',
     imports: [CommonModule, RouterLinkWithHref, RouterLinkActive, TableComponent]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   private cartService = inject(CartService);
   private router = inject(Router);
 
   hideSideMenu = signal(true);
   prodsTotal = this.cartService.prodsQuantity;
+  user = '';
+
+  ngOnInit() {
+    this.user = localStorage.getItem('user') ?? '';
+    console.log(this.user);    
+  }
 
   toggleSideMenu() {
     this.hideSideMenu.update(prevState => !prevState);

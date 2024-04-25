@@ -31,7 +31,14 @@ export default class LoginComponent {
       this.authService.login(email, password)
         .subscribe( user => {
           console.log('User logged in', user);
-          this.router.navigate(['/cart']);
+          if(user.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/cart']);
+          }
+        }, err => {
+          console.error('Login failed', err);
+          alert(`Error logging in:\n${err.message}`);
         });
     }
   }

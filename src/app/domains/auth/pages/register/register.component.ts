@@ -24,7 +24,8 @@ export default class RegisterComponent {
     id: 0,
     name: '', 
     email: '',
-    password: '' 
+    password: '',
+    role: 'user'
   };
 
   currentUser?: User;

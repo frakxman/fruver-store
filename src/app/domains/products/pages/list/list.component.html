@@ -2,13 +2,11 @@
   <div class="w-40">
     <ul>
       <li>
-        <a routerLink="/" class="text-blue-500">All</a>
+        <button class="text-blue-500 cursor-pointer">All</button>
       </li>
-      @for (category of categs(); track $index) {
-        <li>
-          <a routerLink="/"[queryParams]="{category_id: category.id}" class="text-blue-500">{{ category.name }}</a>
-        </li>
-      }
+      <li *ngFor="let category of categs(); let i = index">
+        <button class="text-blue-500 cursor-pointer">{{ category.name }}</button>
+      </li>
     </ul>
   </div>
   <div class="grid grid-cols-4 gap-4 w-full">

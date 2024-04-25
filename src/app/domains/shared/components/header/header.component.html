@@ -2,7 +2,13 @@
 <nav>
   <div class="w-full flex flex-wrap items-center justify-between mx-auto py-4">
     <div class="flex items-center space-x-8">
-      <a class="flex items-center ">
+      <a 
+        class="flex items-center"
+        routerLink="/"
+        routerLinkActive="border-b-2 border-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        aria-current="page"
+      >
         <img
           src="../../../../../assets/logo/logo.jpg"
           class="h-6 mr-3"
@@ -12,20 +18,10 @@
           Fruver Store
         </span>
       </a>
-      <ul class="flex space-x-6">
-        <li>
-          <a
-            routerLink="/"
-            routerLinkActive="underline"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="block hover:underline"
-            aria-current="page"
-          >
-            Home
-          </a>
-        </li>
-        
-      </ul>
+    </div>
+    <div *ngIf="user" class="flex items-center">
+      <span class="mr-2">Welcome, {{ user | titlecase }}</span>
+      <!-- Resto del código -->
     </div>
     <div class="flex items-center">
       <button class="p-2 border rounded relative" (click)="toggleSideMenu()">
