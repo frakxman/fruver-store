@@ -64,12 +64,16 @@
                 </h3>
               </div>
               <div class="border-t border-gray-200">
-                <dl>
-
-                  <label for="locationName" class="block text-sm font-medium text-gray-700">Name</label>
-                  <input id="locationName" type="text" readonly class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [value]="orderData.locationData.name">
-                  <input type="text" readonly class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [value]="orderData.locationData.address">
-                </dl>
+                <div class="flex">
+                  <dl class="flex-1 mr-2">
+                    <label for="locationName" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input id="locationName" type="text" readonly class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [value]="orderData.locationData.name">
+                  </dl>
+                  <dl class="flex-1 ml-2">
+                    <label for="locationAddress" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input id="locationAddress" type="text" readonly class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-100 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [value]="orderData.locationData.address">
+                  </dl>
+                </div>
               </div>
             </div>
           </div>

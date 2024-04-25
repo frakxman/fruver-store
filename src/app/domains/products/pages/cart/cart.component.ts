@@ -72,7 +72,7 @@ export default class CartComponent implements OnInit  {
       .subscribe({
         next: () => {
           this.cartService.cart.set([]);
-          this.router.navigate(['/products']);
+          this.router.navigate(['/']);
         },
         error: () => alert('Error generating order')
       });
