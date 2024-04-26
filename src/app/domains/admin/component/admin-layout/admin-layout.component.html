@@ -10,9 +10,17 @@
         </li>
       </ul>
     </div>
-    <div class="w-full">
-      <router-outlet />
+    <div class="w-full" *ngIf="router.url === '/admin'; else options">
+      <img
+        src="../../../../../assets/logo/logo.jpg" 
+        alt="Logo"
+      >
     </div>
+    <ng-template #options>
+      <div class="w-full">
+        <router-outlet />
+      </div>
+    </ng-template>
   </div>
 </div>
 
