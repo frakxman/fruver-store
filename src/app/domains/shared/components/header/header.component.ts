@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit() {
     this.user = localStorage.getItem('user') ?? '';
-    console.log(this.user);    
   }
 
   toggleSideMenu() {
@@ -36,6 +35,11 @@ export class HeaderComponent implements OnInit{
   goToCart() {
     this.router.navigate(['/cart']);
     this.hideSideMenu.update(() => true);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.user = '';
   }
 
 }
