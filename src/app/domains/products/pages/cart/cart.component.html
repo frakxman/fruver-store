@@ -1,30 +1,3 @@
-<!-- <div *ngIf="cart().length === 0; else cartTable" class="flex flex-col items-center justify-center h-screen">
-  <h1 class="text-2xl mb-4">Your cart is empty.</h1>
-  <a routerLink="/" type="button" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" >Return to shop</a>
-</div>
-<ng-template #cartTable>
-  <app-table />
-
-</ng-template>
-
-<ng-template #customerData>
-  <div class="flex justify-end mt-2" *ngIf="!logged; else customerData">
-    <button
-      *ngIf="router.url === '/cart'"
-      class="bg-gray-400 font-semibold p-2 mt-2 rounded"
-      (click)="userConfirm()"
-    >
-      Proceed to Checkout
-    </button>
-  </div>
-  <app-customer-data (customerData)="handleCustomerData($event)" />
-</ng-template>
-
-<div *ngIf="payMethod">
-  <app-pay-methods (payMethod)="handlePayMethod($event)" />
-</div> -->
-
-
 <div *ngIf="cart().length === 0" class="flex flex-col items-center justify-center h-screen">
   <h1 class="text-2xl mb-4">Your cart is empty.</h1>
   <a routerLink="/" type="button" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" >Return to shop</a>
@@ -111,7 +84,30 @@
     </div>
   </div>
 
-
+  <div *ngIf="confirmationModal">
+    <div class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <div class="bg-white rounded-lg text-center overflow-hidden shadow-xl transform transition-all sm:w-full sm:max-w-2xl">
+        <!-- Head -->
+        <div class="bg-gray-400 font-semibold px-4 py-5 border-b border-gray-200 sm:px-6">
+          <h3 class="text-2xl leading-6 font-medium text-white" id="modal-title">
+            Order Confirmation
+          </h3>
+        </div>
+        <!-- Body -->
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <p class="text-lg">Order generated with number: {{ orderNumber }}</p>
+        </div>
+        <!-- Actions -->
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:justify-center">
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-lg font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm" (click)="closeConfirmationModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   
   

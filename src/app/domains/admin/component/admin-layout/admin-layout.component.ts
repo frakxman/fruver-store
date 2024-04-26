@@ -24,8 +24,4 @@ export class AdminLayoutComponent {
       { path: '/admin/users', label: 'Users' }
   ];
 
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
-  }
 }

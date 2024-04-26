@@ -30,6 +30,8 @@ export default class CartComponent implements OnInit  {
   locationData!: Customer;
   payMethodData!: Payment;
   orderData!: Order;
+  confirmationModal = false;
+  orderNumber = Math.floor(Math.random() * 10000);
 
 
   ngOnInit(): void {
@@ -71,10 +73,15 @@ export default class CartComponent implements OnInit  {
     this.cartService.generateOrder(this.orderData)
       .subscribe({
         next: () => {
-          this.cartService.cart.set([]);
-          this.router.navigate(['/']);
+          this.confirmationModal = true;
         },
         error: () => alert('Error generating order')
       });
+  }
+
+  closeConfirmationModal() {
+    this.cartService.cart.set([]);
+    this.router.navigate(['/']);
+    this.confirmationModal = false;
   }
 }
