@@ -15,7 +15,7 @@ export class AuthService {
   private http = inject(HttpClient);
 
   user?: User;
-  
+
   getAllUsers() {
     return this.http.get<User[]>(`${this.baseUrl}/users`);
   }
@@ -33,7 +33,7 @@ export class AuthService {
             this.user = user;
             if (this.user.name && this.user.role) {
               localStorage.setItem('user', this.user.name);
-              localStorage.setItem('role', this.user.role); 
+              localStorage.setItem('role', this.user.role);
             }
           }
         }
@@ -42,8 +42,8 @@ export class AuthService {
   }
 
   checkAuhtentication() {
-    if (!localStorage.getItem('user') && !localStorage.getItem('role')) return;
-    return true;  
+    if (localStorage.getItem('role') !== 'admin') return;
+    return true;
   }
 
 
