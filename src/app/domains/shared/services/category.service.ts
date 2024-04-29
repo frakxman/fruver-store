@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
+import { environment } from '@env/environments';
+
 import { Category } from '@shared/models/category.model';
 
 @Injectable({
@@ -8,11 +10,13 @@ import { Category } from '@shared/models/category.model';
 })
 export class CategoryService {
 
+  private readonly baseUrl: string = environment.baseUrl;
+
   private http = inject(HttpClient);
 
   constructor() { }
 
   getCategories() {
-    return this.http.get<Category[]>('http://localhost:3000/categories');
+    return this.http.get<Category[]>(`${this.baseUrl}/categories`);
   }
 }
