@@ -24,13 +24,13 @@ export class CartService {
     return cart.reduce( (total, product) => total + (product.price * product.quantity), 0 );
   });
 
-  find(id: number) {
-    return this.cart().find(product => product.id === id);
+  find(id: string) {
+    return this.cart().find(product => product._id === id);
   }
 
   add(product: Product) {
     this.cart.update(state => {
-      const existingProductIndex = state.findIndex(item => item.id === product.id)
+      const existingProductIndex = state.findIndex(item => item._id === product._id)
       if (existingProductIndex !== -1) {
         const updatedCart = [...state];
         updatedCart[existingProductIndex].quantity += 1;
@@ -43,7 +43,7 @@ export class CartService {
 
   decreaseQuantity(product: Product) {
   this.cart.update(state => {
-    const existingProductIndex = state.findIndex(item => item.id === product.id);
+    const existingProductIndex = state.findIndex(item => item._id === product._id);
     if (existingProductIndex !== -1) {
       const updatedCart = [...state];
       updatedCart[existingProductIndex].quantity -= 1;
@@ -61,7 +61,7 @@ export class CartService {
 
 removeProduct(product: Product) {
   this.cart.update(state => {
-    const existingProductIndex = state.findIndex(item => item.id === product.id);
+    const existingProductIndex = state.findIndex(item => item._id === product._id);
     if (existingProductIndex !== -1) {
       const updatedCart = [...state];
       updatedCart.splice(existingProductIndex, 1);
@@ -73,7 +73,7 @@ removeProduct(product: Product) {
 }
 
   updateQuantity(product: Product, quantity: number) {
-    this.cart.update(state => state.map( p => p.id === product.id ? { ...p, quantity } : p ));
+    this.cart.update(state => state.map( p => p._id === product._id ? { ...p, quantity } : p ));
   }
 
   generateOrder(orderData: any) {

@@ -20,6 +20,7 @@ export class ProductsService {
   }
 
   getOne(id: string) {
+    console.log('Getting product with id:', id);
     return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
   }
 

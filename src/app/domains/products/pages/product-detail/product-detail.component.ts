@@ -24,6 +24,7 @@ export default class ProductDetailComponent {
   private cartService = inject(CartService);
 
   ngOnInit() {
+    console.log('Product id', this.id);
     if (this.id) {
       this.productService.getOne(this.id)
       .subscribe({

@@ -26,7 +26,7 @@ export default class FormComponent {
   router = inject(Router);
 
   product: Product = {
-    id: 0,
+    _id: '',
     name: '',
     description: '',
     price: 0,
@@ -95,11 +95,11 @@ export default class FormComponent {
   onSubmit() {
     if (this.productForm.invalid) return;
 
-    if (this.currentProduct.id) {
-      this.productService.update(this.currentProduct.id.toString(), this.productForm.value)
+    if (this.currentProduct._id) {
+      this.productService.update(this.currentProduct._id.toString(), this.productForm.value)
         .subscribe({
           next: (product) => {
-            const index = this.prods().findIndex(p => p.id === product.id);
+            const index = this.prods().findIndex(p => p._id === product._id);
             this.prods.update(state => {
               state[index] = product;
               this.router.navigate(['/admin/products']);

@@ -50,6 +50,7 @@ export default class ListComponent {
     this.productsService.getProducts()
       .subscribe({
         next: (products) => {
+          console.log(products);
           this.prods.set(products);
         },
         error: (error) => {
@@ -62,6 +63,7 @@ export default class ListComponent {
     this.categoriesService.getCategories()
       .subscribe({
         next: (categories) => {
+          console.log(categories);
           this.categs.set(categories);
         },
         error: (error) => {

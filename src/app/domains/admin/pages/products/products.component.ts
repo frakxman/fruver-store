@@ -39,9 +39,9 @@ export default class ProductsComponent {
   }
 
   edit(product: Product) {
-    console.log('Edit product', typeof product.id, product.id);
-    const id = product.id;
-    this.router.navigate([`/admin/edit/${id!}`]);
+    console.log('Edit product', typeof product._id, product._id);
+    const _id = product._id;
+    this.router.navigate([`/admin/edit/${_id!}`]);
   }
 
   showConfirmationModal(product: any) {
@@ -54,7 +54,7 @@ export default class ProductsComponent {
   }
 
   remove(product: Product) {
-    this.productsService.remove(product.id!.toString())
+    this.productsService.remove(product._id!)
       .subscribe({
         next: () => {
           this.showModal = false;
