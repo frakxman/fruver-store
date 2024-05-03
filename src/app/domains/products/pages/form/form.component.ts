@@ -44,10 +44,10 @@ export default class FormComponent {
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(1)]],
-    categoryId: ['', [Validators.required]],
+    category: [''],
     quantity: [0],
     stock: ['', [Validators.required]],
-    images: this.fb.array(['']),
+    // images: this.fb.array(['']),
   });
 
   ngOnInit() {
@@ -59,7 +59,12 @@ export default class FormComponent {
       switchMap(({ id }) => this.productService.getOne(id)),
       tap(prod => console.log('Product id', prod._id))
     ).subscribe({
-      next: prod => this.productForm.reset(prod),
+      next: prod => {
+        this.productForm.reset({
+          ...prod,
+          category: prod.category._id
+        })
+      },
       error: () => this.router.navigate(['/products'])
     });
   }
@@ -73,6 +78,7 @@ export default class FormComponent {
     this.categoriesService.getCategories()
       .subscribe({
         next: (categories) => {
+          console.log('Categories', categories);
           this.categs.set(categories);
         },
         error: (error) => {
@@ -95,11 +101,13 @@ export default class FormComponent {
 
   onSubmit() {
     console.log(this.productForm.value);
+    console.log('Form is valid?', this.productForm.valid);
+    console.log('Form errors?',this.productForm.errors);
     if (this.productForm.invalid) return;
 
     console.log('Current product', this.currentProduct._id);
     if (this.currentProduct._id) {
-      console.log('Updating product', this.currentProduct._id);
+      console.log('Updating product', this.currentProduct._id, 'with data', this.productForm.value);
       this.productService.update(this.currentProduct._id, this.productForm.value)
         .subscribe({
           next: (product) => {
@@ -116,11 +124,9 @@ export default class FormComponent {
       return;
     }
 
-    const newId = this.prods().length + 1;
     const defaultImage = 'https://picsum.photos/640/640?r=' + Math.random();
 
     this.productForm.patchValue({
-      id: newId.toString(),
       images: [defaultImage]
     });
 
