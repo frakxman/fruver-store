@@ -4,10 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
 
-import { Category } from '@shared/models/category.model';
 import { Product } from '@shared/models/product.model';
-
-import { CategoryService } from '@shared/services/category.service';
 import { ProductsService } from '@shared/services/products.service';
 
 @Component({
@@ -20,7 +17,6 @@ import { ProductsService } from '@shared/services/products.service';
 export default class FormComponent {
 
   private fb = inject( FormBuilder );
-  private categoriesService = inject(CategoryService);
   private productService = inject(ProductsService);
   private activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
@@ -30,13 +26,11 @@ export default class FormComponent {
     name: '',
     description: '',
     price: 0,
-    category: {} as any, // TODO: Fix this type
     images: [],
     quantity: 0,
     stock: 0
   };
 
-  categs = signal<Category[]>([]);
   prods = signal<Product[]>([]);
 
   public productForm: FormGroup = this.fb.group({
@@ -44,14 +38,12 @@ export default class FormComponent {
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(1)]],
-    category: [''],
     quantity: [0],
     stock: ['', [Validators.required]],
-    // images: this.fb.array(['']),
   });
 
   ngOnInit() {
-    this.getCategories();
+    this.getProducts();
     this.getProducts();
     if ( !this.router.url.includes('edit') ) return;
     this.activatedRoute.params
@@ -61,8 +53,7 @@ export default class FormComponent {
     ).subscribe({
       next: prod => {
         this.productForm.reset({
-          ...prod,
-          category: prod.category._id
+          ...prod
         })
       },
       error: () => this.router.navigate(['/products'])
@@ -72,19 +63,6 @@ export default class FormComponent {
   get currentProduct() {
     const product = this.productForm.value as Product;
     return product;
-  }
-
-  private getCategories() {
-    this.categoriesService.getCategories()
-      .subscribe({
-        next: (categories) => {
-          console.log('Categories', categories);
-          this.categs.set(categories);
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
   }
 
   private getProducts() {
@@ -100,15 +78,13 @@ export default class FormComponent {
   }
 
   onSubmit() {
-    console.log(this.productForm.value);
-    console.log('Form is valid?', this.productForm.valid);
-    console.log('Form errors?',this.productForm.errors);
+
     if (this.productForm.invalid) return;
 
-    console.log('Current product', this.currentProduct._id);
+    // To edit a product
     if (this.currentProduct._id) {
-      console.log('Updating product', this.currentProduct._id, 'with data', this.productForm.value);
-      this.productService.update(this.currentProduct._id, this.productForm.value)
+      const { _id, ...productWithoutId } = this.productForm.value;
+      this.productService.update(this.currentProduct._id, productWithoutId)
         .subscribe({
           next: (product) => {
             const index = this.prods().findIndex(p => p._id === product._id);
@@ -124,13 +100,21 @@ export default class FormComponent {
       return;
     }
 
+    // To create a product
     const defaultImage = 'https://picsum.photos/640/640?r=' + Math.random();
 
-    this.productForm.patchValue({
-      images: [defaultImage]
-    });
+    const product = {
+      ...this.productForm.value,
+      quantity: 1,
+    };
 
-    this.productService.create(this.productForm.value)
+    delete product._id;
+
+    if (!product.images || product.images.length === 0) {
+      product.images = [defaultImage]; 
+    }
+
+    this.productService.create(product)
       .subscribe({
         next: (product) => {
           this.prods.update(state => [...state, product]);

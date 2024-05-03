@@ -25,11 +25,12 @@ export class ProductsService {
   }
 
   create(product: Product) {
+    console.log('Creating product:', product);
     return this.http.post<Product>(`${this.baseUrl}/products`, product);
   }
 
   update(id: string, changes: Partial<Product>) {
-    return this.http.patch<Product>(`${this.baseUrl}/products/${id}`, changes);
+    return this.http.put<Product>(`${this.baseUrl}/products/${id}`, changes);
   }
 
   remove(id: string) {
