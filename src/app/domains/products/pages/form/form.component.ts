@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 import { Category } from '@shared/models/category.model';
 import { Product } from '@shared/models/product.model';
@@ -40,7 +40,7 @@ export default class FormComponent {
   prods = signal<Product[]>([]);
 
   public productForm: FormGroup = this.fb.group({
-    id: [''],
+    _id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(1)]],
@@ -57,6 +57,7 @@ export default class FormComponent {
     this.activatedRoute.params
     .pipe(
       switchMap(({ id }) => this.productService.getOne(id)),
+      tap(prod => console.log('Product id', prod._id))
     ).subscribe({
       next: prod => this.productForm.reset(prod),
       error: () => this.router.navigate(['/products'])
@@ -93,10 +94,13 @@ export default class FormComponent {
   }
 
   onSubmit() {
+    console.log(this.productForm.value);
     if (this.productForm.invalid) return;
 
+    console.log('Current product', this.currentProduct._id);
     if (this.currentProduct._id) {
-      this.productService.update(this.currentProduct._id.toString(), this.productForm.value)
+      console.log('Updating product', this.currentProduct._id);
+      this.productService.update(this.currentProduct._id, this.productForm.value)
         .subscribe({
           next: (product) => {
             const index = this.prods().findIndex(p => p._id === product._id);
