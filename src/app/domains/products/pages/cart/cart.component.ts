@@ -60,7 +60,6 @@ export default class CartComponent implements OnInit  {
     this.showModal = true;
 
     this.orderData = {
-      userId: this.userId,
       locationData: this.locationData,
       payMethodData: data,
       products: this.cart(),
@@ -73,9 +72,14 @@ export default class CartComponent implements OnInit  {
   }
 
   confirmOrder() {
-    console.log('Order generated', this.orderData);
+    const orderData = {
+      userId: this.userId,
+      date: new Date(),
+      products: this.cart().map(product => product._id),
+    };
+    console.log('Order generated', orderData);
 
-    this.cartService.generateOrder(this.orderData)
+    this.cartService.generateOrder(orderData)
       .subscribe({
         next: () => {
           this.confirmationModal = true;

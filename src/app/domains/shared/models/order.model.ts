@@ -1,7 +1,6 @@
 import { Product } from "./product.model";
 
 export interface Order {
-  userId: string;
   locationData: Customer;
   payMethodData: Payment;
   products: Product[];
