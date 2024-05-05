@@ -37,7 +37,6 @@ export default class LoginComponent {
           this.authService.user$.pipe(
             take(1)
           ).subscribe(user => {
-            console.log('User logged in', user);
             if(user?.role === 'admin') {
               this.router.navigate(['/admin']);
             } else {

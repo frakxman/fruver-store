@@ -6,6 +6,8 @@ import { TableComponent } from "@shared/components/table/table.component";
 import { CustomerDataComponent } from "../../components/customer-data/customer-data.component";
 
 import { CartService } from '@shared/services/cart.service';
+import { AuthService } from '@auth/services/auth.service';
+
 import { PayMethodsComponent } from "../../components/pay-methods/pay-methods.component";
 
 import { Customer, Order, Payment } from '@shared/models/order.model';
@@ -21,12 +23,14 @@ export default class CartComponent implements OnInit  {
 
   router = inject(Router);
   private cartService = inject(CartService);
+  private authService = inject(AuthService);
 
   cart = this.cartService.cart;
   total = this.cartService.total;
   logged = false;
   showModal = false;
   step = 0;
+  userId = '';
   locationData!: Customer;
   payMethodData!: Payment;
   orderData!: Order;
@@ -35,8 +39,10 @@ export default class CartComponent implements OnInit  {
 
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
-    this.logged = !!user;
+    this.authService.user$.subscribe(user => {
+      this.userId = user?._id ?? '';
+    });
+    this.logged = !!this.userId;
   }
 
   userConfirm() {
@@ -52,10 +58,9 @@ export default class CartComponent implements OnInit  {
   onPayMethod(data: any) {
     console.log(data)
     this.showModal = true;
-    const userId = localStorage.getItem('user') ?? '';
 
     this.orderData = {
-      userId: userId,
+      userId: this.userId,
       locationData: this.locationData,
       payMethodData: data,
       products: this.cart(),

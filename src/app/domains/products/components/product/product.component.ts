@@ -11,15 +11,11 @@ import { Product } from '../../../shared/models/product.model';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements OnInit{
+export class ProductComponent {
 
   @Input({ required: true}) product!: Product;
 
   @Output() addToCart = new EventEmitter();
-
-  ngOnInit() {
-    console.log('Product:', this.product);
-  }
 
   addCart() {
     this.addToCart.emit(this.product);
