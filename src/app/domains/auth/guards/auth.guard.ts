@@ -1,20 +1,22 @@
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, CanMatchFn, Route, Router, RouterStateSnapshot, UrlSegment } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, CanMatchFn, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 
-const checkAuthStatus = (): boolean => {
-    const authService: AuthService = inject( AuthService );
-    const router: Router = inject( Router );
-    let isAuthenticated = false;
 
-    if ( authService.checkAuhtentication() ) {
-        isAuthenticated = true;
-        console.log('Authenticated' );
-    } else {
-        router.navigate(['/auth/login']);
-    }
-    return isAuthenticated;
+const checkAuthStatus = (): Observable<boolean | UrlTree> => {
+  const authService: AuthService = inject(AuthService);
+  const router: Router = inject(Router);
+
+  return authService.checkAuthentication().pipe(
+    map(isAuthenticated => {
+      if (!isAuthenticated) {
+        return router.parseUrl('/auth/login');
+      }
+      return isAuthenticated;
+    })
+  );
 };
 
 export const canActivateGuard: CanActivateFn = ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ) => {
@@ -25,6 +27,6 @@ export const canActivateGuard: CanActivateFn = ( route: ActivatedRouteSnapshot, 
 
 export const canMatchGuard: CanMatchFn = ( route: Route, segments: UrlSegment[] ) => {
     // console.log('CanMatch');
-    // console.log({ route, segments }); 
+    // console.log({ route, segments });
     return checkAuthStatus();
 };

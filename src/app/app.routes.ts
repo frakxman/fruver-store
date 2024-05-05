@@ -6,7 +6,7 @@ import { AuthLayoutComponent } from './domains/auth/components/auth-layout/auth-
 import { NotFoundComponent } from './domains/info/pages/not-found/not-found.component';
 import { LayoutComponent } from '@shared/components/layout/layout.component';
 
-// import { canActivateGuard, canMatchGuard } from "@auth/guards/auth.guard";
+import { canActivateGuard, canMatchGuard } from "@auth/guards/auth.guard";
 
 
 export const routes: Routes = [
@@ -45,8 +45,8 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    // canActivate: [canActivateGuard],
-    // canMatch: [ canMatchGuard ],
+    canActivate: [canActivateGuard],
+    canMatch: [ canMatchGuard ],
     children: [
       {
         path: 'products',

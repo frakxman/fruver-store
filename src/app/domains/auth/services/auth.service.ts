@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
 import { environment } from '@env/environments';
 
@@ -32,13 +32,17 @@ export class AuthService {
       );
   }
 
- checkAuthentication(): Observable<boolean> {
-  return this.user$
-    .pipe(
-      map(user => user?.role === 'admin' || false)
-    );
-  }
+  checkAuthentication(): Observable<boolean> {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      return of(false);
+    }
 
+    return this.user$
+      .pipe(
+        map(user => user?.role === 'admin' || false)
+      );
+  }
 
   // logout() {
   //   this.user = undefined;
@@ -46,7 +50,3 @@ export class AuthService {
   // }
 
 }
-
-
-
-
