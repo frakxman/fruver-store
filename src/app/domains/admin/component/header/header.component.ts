@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '@auth/services/auth.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -11,12 +13,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit{
 
-  user = ''
-
+  private authService = inject(AuthService);
   private router = inject(Router);
 
+  user = '';
+
   ngOnInit() {
-    this.user = localStorage.getItem('user') ?? '';
+    this.authService.user$.subscribe(user => {
+      this.user = user?.name ?? '';
+    });
   }
 
   logout() {

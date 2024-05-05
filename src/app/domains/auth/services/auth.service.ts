@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 import { environment } from '@env/environments';
 
@@ -14,43 +14,36 @@ export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
 
-  user?: User;
-
-  getAllUsers() {
-    return this.http.get<User[]>(`${this.baseUrl}/users`);
-  }
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
 
   register(user: User) {
     return this.http.post<User>(`${this.baseUrl}/users`, user);
   }
 
   login(email: string, password: string): Observable<User> {
-    return this.getAllUsers()
+    return this.http.post<User>(`${this.baseUrl}/auth/login`, { email, password })
       .pipe(
-        map(users => users.filter(user => user.email === email && user.password === password)[0]),
-        tap(user => {
-          if (user) {
-            this.user = user;
-            if (this.user.name && this.user.role) {
-              localStorage.setItem('user', this.user.name);
-              localStorage.setItem('role', this.user.role);
-            }
-          }
-        }
-      )
-    )
+        tap((response: any) => {
+          localStorage.setItem('access_token', response.access_token);
+
+          this.userSubject.next(response.user);
+        })
+      );
   }
 
-  checkAuhtentication() {
-    if (localStorage.getItem('role') !== 'admin') return;
-    return true;
+ checkAuthentication(): Observable<boolean> {
+  return this.user$
+    .pipe(
+      map(user => user?.role === 'admin' || false)
+    );
   }
 
 
-  logout() {
-    this.user = undefined;
-    localStorage.removeItem('user');
-  }
+  // logout() {
+  //   this.user = undefined;
+  //   localStorage.removeItem('user');
+  // }
 
 }
 

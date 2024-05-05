@@ -20,41 +20,30 @@ export default class RegisterComponent {
   private fb = inject( FormBuilder );
   private authService = inject(AuthService);
 
-  user: User = { 
-    id: 0,
-    name: '', 
+  user: User = {
+    _id: '',
+    name: '',
     email: '',
     password: '',
-    role: 'user'
+    role: ''
   };
 
   currentUser?: User;
 
   ngOnInit() {
-    this.setUserId();
   }
 
   public userForm: FormGroup = this.fb.group({
-    id: [''],
     name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    role: ['user', [Validators.required]]
   });
-
- setUserId(): Observable<number> {
-  return this.authService.getAllUsers()
-    .pipe(
-      map(users => users.length + 1)
-    );
-  }
 
   register() {
     if (this.userForm.invalid) return;
 
-    this.setUserId().subscribe(id => {
-    this.user = { ...this.userForm.value, id };
-    console.log('Registering user', this.user);
-    this.authService.register(this.user)
+    this.authService.register(this.userForm.value)
       .subscribe({
         next: (user) => {
           console.log('User created', user);
@@ -63,20 +52,6 @@ export default class RegisterComponent {
           console.error('Error creating user', err);
         }
       });
-    });
-  }
-
-  loging() {
-    this.authService.login(this.user.email, this.user.password)
-      .subscribe({
-        next: (user) => {
-          this.currentUser = user;
-          console.log('User logged in', user);
-        },
-        error: (err) => {
-          console.error('Error logging in', err);
-        }
-      });
-  }
+  };
 
 }

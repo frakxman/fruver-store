@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
+
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,7 @@ export default class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router)
 
+
   public loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -29,17 +32,24 @@ export default class LoginComponent {
 
     if (email && password) {
       this.authService.login(email, password)
-        .subscribe( user => {
-          console.log('User logged in', user);
-          if(user.role === 'admin') {
-            this.router.navigate(['/admin']);
-          } else {
-            this.router.navigate(['/cart']);
-          }
-        }, err => {
+      .subscribe({
+        next: () => {
+          this.authService.user$.pipe(
+            take(1)
+          ).subscribe(user => {
+            console.log('User logged in', user);
+            if(user?.role === 'admin') {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/cart']);
+            }
+          });
+        },
+        error: err => {
           console.error('Login failed', err);
           alert(`Error logging in:\n${err.message}`);
-        });
+        }
+      });
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 
 import { Router, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
+import { AuthService } from '@auth/services/auth.service';
 import { CartService } from '../../services/cart.service';
 
 import { CommonModule } from '@angular/common';
@@ -19,13 +20,16 @@ export class HeaderComponent implements OnInit{
 
   private cartService = inject(CartService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   hideSideMenu = signal(true);
   prodsTotal = this.cartService.prodsQuantity;
   user = '';
 
   ngOnInit() {
-    this.user = localStorage.getItem('user') ?? '';
+    this.authService.user$.subscribe(user => {
+      this.user = user?.name ?? '';
+    });
   }
 
   toggleSideMenu() {
