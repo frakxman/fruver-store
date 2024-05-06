@@ -2,17 +2,17 @@
   <table class="table-auto w-full">
     <thead>
       <tr>
-        <th class="px-4 py-2"></th>
+        <th class="px-4 py-2 lg:table-cell hidden">Image</th>
         <th class="px-4 py-2">Name</th>
         <th class="px-4 py-2">Quantity</th>
-        <th class="px-4 py-2">Price</th>
+        <th class="px-4 py-2 lg:table-cell hidden">Price</th>
         <th class="px-4 py-2">Total</th>
-        <th class="px-4 py-2">Actions</th>
+        <th class="px-4 py-2 lg:table-cell hidden">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of cart()" class="border-t w-full">
-        <td class="px-4 py-2">
+        <td class="px-4 py-2 lg:table-cell hidden">
           <img
             [src]="product.images[0] ? product.images[0] : 'assets/logo/noImage.jpg'"
             [alt]="product.name"
@@ -35,9 +35,9 @@
             </a>
           </div>
         </td>
-        <td class="px-4 py-2 text-center">{{ product.price | currency:'$':'symbol':'1.0' }}</td>
+        <td class="px-4 py-2 text-center lg:table-cell hidden">{{ product.price | currency:'$':'symbol':'1.0' }}</td>
         <td class="px-4 py-2 text-right">{{ (product.price * product.quantity ) | currency:'$':'symbol':'1.0' }}</td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-4 py-2 text-center lg:table-cell hidden">
           <button
             class="bg-red-400 text-white p-2 rounded"
             (click)="remove(product)"
