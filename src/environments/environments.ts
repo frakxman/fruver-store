@@ -4,3 +4,5 @@ export const environment = {
   production: true,
   baseUrl: 'https://frakx-store-production.up.railway.app'
 };
+
+
