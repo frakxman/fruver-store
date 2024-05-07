@@ -18,8 +18,7 @@ export default class LoginComponent {
 
   private fb = inject( FormBuilder );
   private authService = inject(AuthService);
-  private router = inject(Router)
-
+  private router = inject(Router);
 
   public loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],

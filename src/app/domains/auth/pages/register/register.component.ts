@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
 import { User } from '../../models/user.model';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +18,7 @@ export default class RegisterComponent {
 
   private fb = inject( FormBuilder );
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   user: User = {
     _id: '',
@@ -43,14 +43,14 @@ export default class RegisterComponent {
   register() {
     if (this.userForm.invalid) return;
 
-    
-
     this.authService.register(this.userForm.value)
       .subscribe({
         next: (user) => {
+          this.router.navigate(['/login']);
           console.log('User created', user);
         },
         error: (err) => {
+          alert(`Error creating user:\n${err.message}`);
           console.error('Error creating user', err);
         }
       });
