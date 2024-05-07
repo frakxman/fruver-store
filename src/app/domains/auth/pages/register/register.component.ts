@@ -43,6 +43,8 @@ export default class RegisterComponent {
   register() {
     if (this.userForm.invalid) return;
 
+    
+
     this.authService.register(this.userForm.value)
       .subscribe({
         next: (user) => {
