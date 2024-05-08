@@ -1,27 +1,28 @@
 # FruverStore
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+## Guía del Usuario para la Tienda Virtual
+### ¡Bienvenido a FruverStore! Aquí te proporcionamos un paso a paso para realizar compras en nuestra plataforma:
 
-## Development server
+### 1. Agregar Productos al Carrito
+- Explora nuestra tienda virtual y selecciona los productos que deseas adquirir.
+- Haz clic en el botón "Agregar al Carrito" para cada producto que quieras comprar.
+- Revisa los productos en tu carrito haciendo clic en el ícono del carrito situado en la esquina superior derecha de la pantalla.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 2. Registro y Compra
+- Cuando estés listo para comprar, inicia el proceso de registro.
+- Serás redirigido a la página de inicio de sesión. Si ya tienes una cuenta, ingresa tu correo electrónico y contraseña. Si no, haz clic en "Registrarse" y completa el formulario de registro.
+- Una vez registrado e iniciada la sesión, podrás completar tu compra.
 
-## Code scaffolding
+## Guía del Administrador
+### ¡Hola, administrador! Aquí te presentamos las instrucciones para gestionar nuestra tienda virtual:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 1. Iniciar Sesión como Administrador
+- Ve a la página de inicio de sesión.
+- Ingresa tus credenciales de administrador y haz clic en "Iniciar Sesión".
+- Una vez autenticado, tendrás acceso a todas las funciones administrativas.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 2. Funciones Administrativas
+- **Listar Productos**: En el panel de administración, puedes ver todos los productos disponibles en la tienda.
+- **Crear Productos**: Agrega nuevos productos a la tienda completando el formulario con la información del producto.
+- **Editar Productos**: Modifica la información de los productos existentes.
+- **Eliminar Productos**: Si necesitas eliminar un producto, selecciona el producto que deseas eliminar y confirma la acción.
